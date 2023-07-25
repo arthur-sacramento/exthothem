@@ -1,0 +1,151 @@
+﻿<?php error_reporting(0); ?>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="icons/folder.png">
+    <title>Hello</title>
+    <style>
+
+      body {
+        font-family: arial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url("background/1.jpg");
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input {
+        width: 400px;
+        height: 40px;
+        font-size: 18px;
+        margin-top: 10px;
+      }
+
+      .search-button {
+        background-color: #111;
+        color: white;
+        cursor: pointer;
+      }
+
+      .search-button: hover {
+        background-color: #333;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: row;
+      }
+     
+      a {
+        font-family: verdana;
+        letter-spacing: 6px;
+        font-size: 16px;    
+        color: #333;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #666;
+      }
+
+      .embed-next {
+        display: none;
+      }
+
+      .msg-show {
+        background-color: #fff;
+        padding: 30px;
+        margin: 10px;
+        border-radius: 2px 2px 2px 2px;
+        opacity: 0.8;
+      }
+
+      .msg-show2 {
+        background-color: #fff;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 5px 5px 5px 5px;
+        opacity: 0.8;
+      }
+
+      .download-source {
+        border: px solid #333;
+        padding: 4px 12px 4px 12px;
+        background-color: #fff;
+        border-radius: 15px 15px 15px 15px;
+        opacity: 0.5;
+      }
+
+      .panel {
+        border: 1px solid #999;
+        padding: 4px 12px 4px 12px;
+        background-color: #fff;
+        boder: 1px solid #CCC;
+        opacity: 0.8;           
+      }
+
+      .download-source {
+        opacity: 0.6;
+      }
+
+      .download-source: hover {
+        opacity: 0.9;
+      }
+
+      .top-right {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+      }
+
+      .top-right:hover  {
+        opacity: 0.8;
+      }
+
+      li  {
+        padding-left: 10px
+      }
+    </style>
+</head>
+
+  <body>
+
+    <a href='menu.html' class='top-right'><img src='icons/breadcrumb_select_current.png' height='50px' alt='menu'></a>
+
+    <div class='panel'>    
+    <br><br> 
+    <div align='center'>share and search links easily</div><br><br>
+      <li><a href="doc.html">Documentation</a></li>
+      <li><a href="https://mega.nz/file/E45CXbJI#_mLBoeRjbQ6QiZ6nN9ebvzTUGRljSkS7HE-831kmG3c">Sourcecode</a></li>
+      <li><a href="chat.php">Chat</a></li> 
+      <li><a href="servers.php">Check servers</a></li>
+      <li><a href="fields.php">Paste contents (multiple fields)</a></li>
+      <li><a href="paste.php">Paste contents (one field)</a></li>
+      <li><a href="fields_search.php">Paste search</a></li>
+      <li><a href="upload.php">Upload a file</a></li>
+      <li><a href="search.php">Upload search</a></li> 
+      <li><a href="category_search.php">Category search</a></li>
+      <li><a href="all_files.php">Show all files</a></li>
+      <li><a href="all_files_simple.php">Show all files (simple)</a></li>
+      <li><a href="index.html">Index.html</a></li>      
+      <li><a href="README.txt">Donations</a></li>
+    <br><br>
+    </div>
+  </body>
+</html>
