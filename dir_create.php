@@ -6,6 +6,9 @@ mkdir("comments", 0755, true);
 mkdir("icons", 0755, true);
 mkdir("mysql", 0755, true);
 mkdir("thumbs", 0755, true);
+mkdir("categories/contents", 0755, true);
+mkdir("categories/upload", 0755, true);
+mkdir("categories/random", 0755, true);
 
 $sourceFile = "1.jpg";
 $destinationFolder = "background/";

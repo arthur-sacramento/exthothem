@@ -1,151 +1,113 @@
-﻿<?php error_reporting(0); ?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
-    <link rel="icon" href="icons/folder.png">
-    <title>file backup and sharing</title>
-    <style>
+<head>
+  <title>
+    v1.0.1 - eXthothem - NoSQL PHP applications
+  </title>
+  <style>
+    body {
+      font-family: arial;
+    }
 
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        padding: 0;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: 100vh;
-        margin: 0;
-        background-image: url("background/1.jpg");
-      }
+    table {
+      width: 90%;
+      border-collapse: collapse;
+    }
 
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+    td{
+      text-align: center; 
+      padding: 10px;
+      border: 1px solid #CCC;
+ 
+    }
 
-      input {
-        width: 400px;
-        height: 40px;
-        font-size: 18px;
-        margin-top: 10px;
-      }
-
-      .search-button {
-        background-color: #111;
-        color: white;
-        cursor: pointer;
-      }
-
-      .button-container {
-        display: flex;
-        flex-direction: row;
-      }
-     
-      a {
-        font-family: verdana;
-        letter-spacing: 6px;
-        font-size: 16px;    
-        color: #333;
-        text-decoration: none;
-      }
-
-      a:hover {
-        color: #666;
-      }
-
-      .panel {
-        border: 1px solid #999;
-        padding: 4px 12px 4px 12px;
-        background-color: #fff;
-        boder: 1px solid #CCC;
-        opacity: 0.8;           
-      }
-
-      .top-right {
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-      }
-
-      .top-right:hover  {
-        opacity: 0.8;
-      }
-
-      .presents  {
-        font-family: verdana;
-        letter-spacing: 6px;
-        color: #333;
-        opacity: 0.9;
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-
-      .small-font  {
-        font-size: 10px;
-        letter-spacing: 0px;
-      }
-
-    </style>
-  </head>
-  <body>
-    <a href='menu.html' class='top-right'><u>menu</u></a>
-    <div align='center'>
-      <a href='#'>PHP freelance</a><br>
-      <a href='https://www.linkedin.com/in/arthur-sacramento-a55003230/' target=_'blank'>linkedin</a> | &nbsp;
-      <a href='http://wa.me/5591983608861' target=_'blank'>wa.me</a> | &nbsp; 
-      <a href='https://chat.whatsapp.com/LvWpR495NDZ2wLvjs6KqyO' target=_'blank'>whatsapp</a> | &nbsp;
-      <a href='#' onclick="alert('exthothem@gmail.com');" target=_'blank'>e-mail</a>
-    </div>
-
-    <br>
-    <br><br>
-    <div class='panel'>
-      <a href='fields.php' class='small-font'>insert</a> |
-      <a href='paste.php' class='small-font'>paste</a> |
-      <a href='files_full.php' class='small-font'>full search</a> |
-      <a href='categories_list.php' class='small-font'>categories</a> |
-      <a href='https://mega.nz/file/tpwRRRzL#bKjL6wl6AvDdVvIdun2X3IqKLm2FH4N3tPNpIcyfeDE' target='_blank' class='small-font'>sourcecode</a>
-      <form method="POST" action="files_simple.php">        
-        <input type="text" name="search" style="width: 392px;" placeholder="Insert a link or URL">
-          <div class="button-container">        
-            <input type="submit" name="submit" value="Send" class='search-button'>
-          </div>        
-        </form>
-        </br>
-    </div>  
-    </br>
-    <div class='presents'>it's easy share and backup with Exthothem</div>
-    <br><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
-
-    <iframe src='https://filevenda.netlify.app/categories/ads.html' width='100%' style='border: 0px;'></iframe>
-   
-    <hr>
-    <div align='center' style='position:absolute; bottom: 15px'>
-      <a href='#'>Donate</a> :  &nbsp;
-      <a href='#' onclick="alert('exthothem@gmail.com');">Pix</a> | &nbsp;
-      <a href='https://www.paypal.com/donate/?hosted_button_id=MA7KAL6PP4Y7Q' target=_'blank'>PayPal</a> | &nbsp; 
-      <a href='#' onclick="alert('1CX6rNZnBexgTW8HW8VRhBoKAG3TsNc9Em');" target=_'blank'>Bitcoin</a>
-
-      &nbsp;&nbsp; <a href='#'>Website</a> :  &nbsp;   
-      <a href='https://exthothem.000webhostapp.com/' target='_blank'>1</a> | &nbsp;
-      <a href='http://exthothem.atwebpages.com/' target='_blank'>2</a> | &nbsp;
-      <a href='http://exthothem.free.nf' target='_blank'>3</a> | &nbsp;
-
-      <a href='http://twitter.com/exthothem' target='_blank'>@exthothem</a>
+    tr {
+      border: 1px solid #CCC;
+    }
     
-    </div>
-  </body>
+    .textDescription {
+      font-family: verdana;
+      color: #333;
+      letter-spacing: 3px;
+    }
+
+  </style>
+</head>
+<body>
+  <div align='center'>
+    <table style='background-color: #DDD;'>
+      <tr>
+        <td style='border-right: 1px solid #CCC;'>      
+          <div align='center'>
+          <table style='background-color: #FFF;'>
+            <tr>
+              <td><a href="upload.php"><img src='icons/netvibes.png' alt=''><br>Upload a file (select)</a></td>
+              <td><a href="upload_drop.php"><img src='icons/package_add.png' alt=''><br>Upload a file (drop)</a></td>
+              <td><a href="fields.php"><img src='icons/document_copies.png' alt=''><br>Paste contents (multiple fields)</a></td>
+              <td><a href="paste.php"><img src='icons/document_empty.png' alt=''><br>Paste contents (one field)</a></td>
+            </tr>
+            <tr>
+              <td><a href="write_get.php"><img src='icons/attach.png' alt=''><br>Send text via GET contents</a></td>  
+              <td><a href="folders.php"><img src='icons/document_green.png' alt=''><br>Folders menu</a></td>  
+              <td><a href="files_full.php"><img src='icons/understanding.png' alt=''><br>Full search</a></td>
+              <td><a href="files.php"><img src='icons/folder_explorer.png' alt=''><br>Category search</a></td>
+            </tr>
+            <tr>
+              <td><a href="fields_search.php"><img src='icons/application_form_magnify.png' alt=''><br>Paste search</a></td>
+              <td><a href="chat.php"><img src='icons/comment.png' alt=''><br>Chat</a> / <br> <a href='comment.php?hash=hello'>Comment</a></td>
+              <td><a href="servers.php"><img src='icons/globe_australia.png' alt=''><br>Check servers</a></td>        
+              <td><a href="all_files.php"><img src='icons/list.png' alt=''><br>Show all files</a></td>  
+            </tr>
+            <tr>      
+              <td><a href="main.php"><img src='icons/image.png' alt=''><br>Main (URL upload)</a></td>      
+              <td><a href="menu.html"><img src='icons/controlbar.png' alt=''><br>Menu</a></td>
+              <td><a href="#"><img src='icons/coins_in_hand.png' alt=''><a href='https://www.paypal.com/donate/?hosted_button_id=MA7KAL6PP4Y7Q' target='_blank'>Donate</a> / <a href='#' onclick="alert('1CX6rNZnBexgTW8HW8VRhBoKAG3TsNc9Em');">BTC</a></td>     
+              <td><a href='about.html'><img src='icons/download.png' alt=''><br>Sourcecode</a></td>
+            </tr>
+            <tr>      
+              <td><a href="img_thumbs_creator.php"><img src='icons/image.png' alt=''><br>Thumbnail creator<br>(thumbs folder)</a></td>      
+              <td><a href="img_decrease.php"><img src='icons/image_gray.png' alt=''><br>Image compress</a></td>    
+              <td><a href='img_random.php'><img src='icons/dice.png' alt=''><br>Random image<br>generator</a></td>
+              <td><a href="README.txt"><img src='icons/help.png' alt=''><br>README</a></td>                   
+            </tr>
+          </table> 
+        </td>
+        <td style='background-color: #333;'></td>
+      </tr>
+    </table>
+    <br><br>
+
+    <span class='textDescription'>
+      <b>Exthothem</b> search and insert without MySQL or any database.<br>
+      Useful for database slowdown or unavailability.
+    </span> 
+
+    <br><iframe src='https://filevenda.netlify.app/categories/ads.html' width='100%' style='border: 0px;'></iframe>
+
+    <table style='border-radius: 5px 5px 5px 5px;'>
+      <tr style='border: 1px solid #FFF;'><td style='background-color: #00FFAA; color: #FFF; font-family: verdana;'>Freelance services</td></tr>
+      <tr>        
+        <td align='left'><a href='https://www.linkedin.com/in/arthur-sacramento-a55003230/' target='_blank'><img src='icons/php.png' alt=''>PHP freelance</a></td>
+        <td><a href='#' onclick="alert('Pack of adult images and others categories generated by artificial intelligence.');"><img src='icons/things_beauty.png' alt=''>Hot images</a></td>
+        <td><a href='#' onclick="alert('I will translate your texts using Chat-GPT. Or create contents.');"><img src='icons/locate.png' alt=''>Translations</a></td>
+        <td><a href='token.html' onclick="alert('Buy our token. Or promote our project and receive our token as a reward.');" target='_blank'><img src='icons/elements.png' alt=''>Tokens</a></td>
+      </tr>
+      <tr>
+        <td><a href='#' onclick="alert('Gain a general understanding of programming. For beginners!');"><img src='icons/rubber_duck.png' alt=''>Programming course</a></td>
+        <td><a href='#' onclick="alert('Request a remote task as: Providing feedback on a website or app, Basic video editing, music composition or drum insert, Proofreading a short document or article, Creating a simple graphic design element (e.g., logo resizing, basic image editing), image creation with A.I, product or software review,  text correction, article creation, content writing, moderation, customer service, social media management, among others.');"><img src='icons/clown_fish.png' alt=''>Remote tasks</td>
+        <td><a href='#' onclick="alert('Get the right to use our software commercially and also have access to updates and support. Or participate in the profit and development of the project by paying a small registration fee.');"><img src='icons/rosette.png' alt='' width='20px'>Commercial use</a></td>       
+        <td>Payments<br>
+          <a href='#' onclick="alert('exthothem@gmail.com');"><img src='icons/email.png' width='32px' alt='email'></a>           
+          <a href='http://wa.me/5591983608861' target='_blank'><img src='icons/whatsapp_small.png' alt='whatsapp'></a> 
+          <a href='https://www.paypal.com/donate/?hosted_button_id=MA7KAL6PP4Y7Q' target='_blank'><img src='icons/paypal_fulllogo.png' alt='paypal'></a>           
+          <a href='#' onclick="alert('1CX6rNZnBexgTW8HW8VRhBoKAG3TsNc9Em');"><img src='icons/bitcoin.png' alt='bitcoin' width='32px'></a> 
+          <a href='#' onclick="alert('exthothem@gmail.com');"><img src='icons/pix.png' alt='pix' width='32px'></a> 
+          <br> 
+      </td> 
+     </trd>
+   </table>
+
+  <br>
+  © 2023 - eXthothem<br>
+</body>
 </html>
-
-<?php
-
-  // Create the project folders
-  include ("dir_create.php");
-
-?>

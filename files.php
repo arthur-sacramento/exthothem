@@ -15,7 +15,6 @@ error_reporting(0);
   }
 
   /* Style for the top bar */
-
   .top {
     position: fixed; /* Set position to fixed */
     top: 0; /* Position at the bottom of the page */
@@ -45,8 +44,7 @@ error_reporting(0);
   .button{
     padding: 20px;
     background-color: #000;
-   //border-radius: 15px 15px 15px 15px;
-   letter-spacing: 4px;
+    letter-spacing: 4px;
     font-size: 12px;
     font-family: Verdana;
     color: #FFFFFF;
@@ -68,18 +66,21 @@ error_reporting(0);
     cursor: pointer;      
   }
 
+  td{
+    padding: 10px;
+
+  }
+
   </style>
 </head>
 
 <body>
 
-<br><br><br><br>
-
 <div class="top">
   <table width='100%'>
   <tr>
     <td width='50%'>
-      <form action="files_full.php" method="POST">
+      <form action="files.php" method="POST">
         &nbsp; <a href='index.php'>Home</a>             
         <input type="text" class="search" placeholder="Name or category" name="search">
         <input type="submit" class="buttonGreen" value="Search">                 
@@ -87,15 +88,17 @@ error_reporting(0);
       </form>
     </td>
     <td align='right' width='50%'>
-      <a href='files_full.php?search=mp4'>Videos</a>
-      <a href='files_full.php?search=img'>Pictures</a>
-      <a href='files_full.php?search=mp3'>Music</a>
-      <a href='files_full.php?search=zip'>Zip</a>
-      <a href='files_full.php?search=pdf'>PDF</a>
+      <a href='files.php?search=mp4'>Videos</a>
+      <a href='files.php?search=img'>Pictures</a>
+      <a href='files.php?search=mp3'>Music</a>
+      <a href='files.php?search=zip'>Zip</a>
+      <a href='files.php?search=pdf'>PDF</a>
       </td>
     </tr>
   </table>
 </div>
+
+<br><br><br><br>
 
 <table width='100%' id='background-image'>
 </table>
@@ -200,65 +203,78 @@ if($lastDotIndex){
     }
 }
 
-echo "$result <table width='95%'><tr><td>";
-  
-// Search by file contents
-    if ($search) {
-        $contentsFolder = 'categories/contents';
-        $files = scandir($contentsFolder);
-        
-        foreach ($files as $file) {
-            if ($file === '.' || $file === '..') {
-                continue;
+echo "$result <div align='center'><table width='95%'><tr><td width='20%' valign='top' style='border-right: 1px solid #CCC; padding: 10px;'>";
+
+$findCategory = explode('/', $search);
+
+$findCategory = $findCategory[0];
+
+$menuCategory = file_get_contents("categories/$findCategory/pages.html");
+
+echo $menuCategory;
+
+echo "</td><td>";
+
+$directoryName = 'categories/' . $search;
+
+if (!$menuCategory){echo "<li>This category do not exists. Try <a href='files_full.php?search=$search'>full search</a></li>"; $search = "";}
+
+// Show all the files inside of a folder. The folder name is the user input
+if ($search) {
+    // Check if the directory exists and is a valid directory
+    if (is_dir($directoryName)) {
+        $files = scandir($directoryName);
+        if ($files !== false) {
+            echo "<h2>Files in '$search':</h2>";
+            foreach ($files as $file) {
+                // Ignore current and parent directory entries
+                if ($file !== '.' && $file !== '..') { 
+
+                    $imgType = 0;  
+
+                    $options = "<a href='comment.php?hash=$file' target='_blank'>comment</a> <a href='categories/$search/$file' target='_blank'>download</a> &nbsp;&nbsp;";         
+                  
+                    $filetype = substr($file, -4);    
+
+                    if($filetype == ".png" || $filetype == ".jpg" || $filetype == "jpeg" || $filetype == ".gif"){
+                        echo "<div align='center'><a href='categories/$search/$file' target='_blank'><img src='categories/$search/$file' width='75%'></a><br>";  
+                        echo "$options";
+                        echo "<a href='categories/$search/$file' target='_blank'>" . basename($file) . "</a></div><hr>"; 
+                        $imgType = 1;
+                    }   
+
+                    $filetype = substr($file, -8); 
+
+                    if($filetype == "png.html" || $filetype == "jpg.html" || $filetype == "gif.html"){
+
+                        $img_show = file_get_contents("categories/$search/$file");
+
+                        echo "<div align='center'>";
+                        echo $img_show = str_replace('../../', "categories/", $img_show);
+                        echo "<br>";
+                        echo "$options";
+                        echo "<a href='categories/$search/$file' target='_blank'>" . basename($file) . "</a></div><hr>"; 
+                        $imgType = 1;
+                    }                
+
+                    if ($imgType == 0){                                       
+                   
+                        echo "<br>";
+                        echo $options;
+                        echo "<a href='categories/$search/$file' target='_blank'>" . basename($file) . "</a><hr>"; 
+
+                    }     
+                }                         
             }
-
-            $filePath = $contentsFolder . '/' . $file;
-            if (is_file($filePath) && strpos(file_get_contents($filePath), $search) !== false) {
-                $tp++;
-                if ($tp == 1){echo "Files with '$search' written<ul>";}
-                echo "<li><a href='$filePath' target='_blank'>$file</a></li>";               
-            } 
+        } else {
+            echo "<p>Error: Unable to read directory contents.</p>";
         }
-    echo "</ul>";
-    }
-
-    // Search by filename
-    $categoriesDir = 'categories/';
-
-    if (!is_dir($categoriesDir)) {
-        die("The '{$categoriesDir}' directory does not exist.");
-    }
-
-    $matchingFiles = array();
-
-    $directories = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($categoriesDir, RecursiveDirectoryIterator::SKIP_DOTS),
-        RecursiveIteratorIterator::SELF_FIRST
-    );
-
-    foreach ($directories as $fileInfo) {
-        if ($fileInfo->isDir()) {
-            continue;
-        }
-
-        $filePath = $fileInfo->getPathname();
-        $fileName = $fileInfo->getFilename();
-
-        if (stripos($fileName, $search) !== false) {
-            $matchingFiles[] = $filePath;
-        }
-    }
-
-    if (empty($matchingFiles)) {
-        echo "No files found that match the search term '{$search}'.";
     } else {
-        echo "<br>Files with '{$search}' in filename:<br>";
-        echo "<ul>";
-        foreach ($matchingFiles as $file) {
-            echo "<li><a href='$file' target='_blank'>$file</a></li>";
-        }
-        echo "</ul>";
+        echo "<li>The specified directory does not exist. Try <a href='files_full.php?search=$search'>full search</a></li>";
     }
+}
+
+echo "</td></tr></table>";
 
 ?>  
  

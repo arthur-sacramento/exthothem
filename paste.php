@@ -64,7 +64,7 @@
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $content = $_POST['content'];
-        $filename = 'contents/' . uniqid('') . '.txt'; // Generate a unique filename
+        $filename = 'categories/contents/' . uniqid('') . '.txt'; // Generate a unique filename
 
         if (file_put_contents($filename, $content)) {
             echo "<p>Content saved successfully in <a href='$filename' target='_blank'>$filename</a></p>";

@@ -123,6 +123,6 @@ input[type="submit"]:hover {
         <input type="submit" value="Upload">
     </form>
 
-  <br><a href='index.php'>back</a>
+  <br><a href='index.php'>back</a> &nbsp; <a href='search.php'>search</a>
 </body>
 </html>

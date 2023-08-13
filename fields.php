@@ -115,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contents = $_POST['contents'];
 
     // Ensure the "contents" folder exists. If not, create it.
-    if (!is_dir('contents')) {
-        mkdir('contents');
+    if (!is_dir('categories/contents')) {
+        mkdir('categories/contents');
     }
 
     // Loop through the submitted data
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sha1Name = sha1($item);
 
         // Create the file path with the "contents" folder and the SHA1 name
-        $filePath = 'contents/' . $sha1Name . '.html';
+        $filePath = 'categories/contents/' . $sha1Name . '.html';
 
         // Save the contents in the file
         file_put_contents($filePath, $item);

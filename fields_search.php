@@ -64,7 +64,7 @@
     // Function to search for files containing the given search term
     function searchFilesInContents($searchTerm)
     {
-        $contentsFolder = 'contents';
+        $contentsFolder = 'categories/contents';
         $files = scandir($contentsFolder);
         
         foreach ($files as $file) {

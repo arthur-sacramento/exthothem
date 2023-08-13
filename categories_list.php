@@ -58,7 +58,7 @@
 
             foreach ($folders as $folder) {
                 if (is_dir($categoriesDir . '/' . $folder)) {
-                    echo "<li><a href='files_simple.php?search=$folder'>$folder</a></li>";
+                    echo "<li><a href='files.php?search=$folder'>$folder</a></li>";
                 }
             }
             ?>
