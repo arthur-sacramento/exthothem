@@ -3,22 +3,22 @@
 class Block {
     public $index;
     public $timestamp;
-    public $data;
+    public $transactions;
     public $previousHash;
     public $hash;
     public $nonce;
 
-    public function __construct($index, $timestamp, $data, $previousHash = '') {
+    public function __construct($index, $timestamp, $transactions, $previousHash = '') {
         $this->index = $index;
         $this->timestamp = $timestamp;
-        $this->data = $data;
+        $this->transactions = $transactions;
         $this->previousHash = $previousHash;
         $this->nonce = 0;
         $this->hash = $this->calculateHash();
     }
 
     public function calculateHash() {
-        return hash('sha256', $this->index . $this->timestamp . json_encode($this->data) . $this->previousHash . $this->nonce);
+        return hash('sha256', $this->index . $this->timestamp . json_encode($this->transactions) . $this->previousHash . $this->nonce);
     }
 
     public function mineBlock($difficulty) {
@@ -40,7 +40,7 @@ class Blockchain {
     }
 
     public function createGenesisBlock() {
-        return new Block(0, date('Y-m-d H:i:s'), 'Genesis Block', '0');
+        return new Block(0, date('Y-m-d H:i:s'), [], '0');
     }
 
     public function addBlock($newBlock) {
@@ -62,12 +62,39 @@ class Blockchain {
     }
 }
 
-// Create an instance of the blockchain and add some blocks
-$myCoin = new Blockchain();
-$myCoin->addBlock(new Block(1, date('Y-m-d H:i:s'), ['amount' => 10]));
-$myCoin->addBlock(new Block(2, date('Y-m-d H:i:s'), ['amount' => 5]));
+class User {
+    public $username;
+    public $balance;
 
-// Check the validity of the blockchain
-echo "Is blockchain valid? " . ($myCoin->isChainValid() ? "Yes" : "No") . "\n";
+    public function __construct($username, $balance) {
+        $this->username = $username;
+        $this->balance = $balance;
+    }
+}
 
-?>
+// Initialize blockchain
+$blockchain = new Blockchain();
+
+// Create users with initial balances
+$alice = new User('Alice', 100);
+$bob = new User('Bob', 50);
+$charlie = new User('Charlie', 200);
+
+// Simulate transactions
+$blockchain->addBlock(new Block(1, date('Y-m-d H:i:s'), [
+    ['sender' => 'Alice', 'recipient' => 'Bob', 'amount' => 10],
+    ['sender' => 'Charlie', 'recipient' => 'Alice', 'amount' => 20]
+]));
+
+$blockchain->addBlock(new Block(2, date('Y-m-d H:i:s'), [
+    ['sender' => 'Bob', 'recipient' => 'Charlie', 'amount' => 5]
+]));
+
+// Display blockchain
+echo "Is blockchain valid? " . ($blockchain->isChainValid() ? "Yes" : "No") . "\n";
+echo json_encode($blockchain, JSON_PRETTY_PRINT);
+
+// Display user balances
+echo "Alice's balance: {$alice->balance}\n";
+echo "Bob's balance: {$bob->balance}\n";
+echo "Charlie's balance: {$charlie->balance}\n";

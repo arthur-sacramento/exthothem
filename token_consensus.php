@@ -35,7 +35,7 @@ class Blockchain {
     public $difficulty;
 
     public function __construct() {
-        $this->chain = [ $this->createGenesisBlock() ];
+        $this->chain = [$this->createGenesisBlock()];
         $this->difficulty = 4; // Adjust difficulty as needed
     }
 
@@ -62,12 +62,30 @@ class Blockchain {
     }
 }
 
-// Create an instance of the blockchain and add some blocks
-$myCoin = new Blockchain();
-$myCoin->addBlock(new Block(1, date('Y-m-d H:i:s'), ['amount' => 10]));
-$myCoin->addBlock(new Block(2, date('Y-m-d H:i:s'), ['amount' => 5]));
+class Node {
+    public $blockchain;
+
+    public function __construct($blockchain) {
+        $this->blockchain = $blockchain;
+    }
+
+    public function mine() {
+        $data = "Transaction data for Block " . (count($this->blockchain->chain) + 1);
+        $newBlock = new Block(count($this->blockchain->chain), date('Y-m-d H:i:s'), $data);
+        $this->blockchain->addBlock($newBlock);
+    }
+}
+
+// Create a blockchain
+$blockchain = new Blockchain();
+
+// Create two nodes
+$node1 = new Node($blockchain);
+$node2 = new Node($blockchain);
+
+// Both nodes mine new blocks
+$node1->mine();
+$node2->mine();
 
 // Check the validity of the blockchain
-echo "Is blockchain valid? " . ($myCoin->isChainValid() ? "Yes" : "No") . "\n";
-
-?>
+echo "Is blockchain valid? " . ($blockchain->isChainValid() ? "Yes" : "No") . "\n";

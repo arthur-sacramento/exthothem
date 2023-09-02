@@ -1,0 +1,13 @@
+.main_table{
+  width: 100%;
+  font-family: arial;
+}
+
+td{
+  border: 1px solid #CCC; 
+  padding: 5px; 
+}
+
+.table_fields{
+  background-color: #DDD;
+}
