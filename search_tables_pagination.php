@@ -74,20 +74,42 @@
         <input type="text" name="search" id="search" placeholder="Enter search text">
         <input type="submit" value="Filter">
     </form>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get user input
+    $searchText = isset($_POST["search"]) ? $_POST["search"] : "";
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get user input
-        $searchText = isset($_POST["search"]) ? $_POST["search"] : "";
+    // Directory containing HTML files
+    $directory = 'categories/contents';
 
-        // Directory containing HTML files
-        $directory = 'categories/contents';
+    // List all HTML files in the directory
+    $files = glob($directory . '/*');
 
-        // List all HTML files in the directory
-        $files = glob($directory . '/*');
+    if (!empty($files)) {
+        // Define pagination variables
+        $itemsPerPage = 10; // Number of items per page
+        $currentPage = isset($_GET["page"]) ? (int)$_GET["page"] : 1; // Current page number
 
-        if (!empty($files)) {
-            foreach ($files as $file) {
+        // Filter files based on search criteria
+        $filteredFiles = array_filter($files, function ($file) use ($searchText) {
+            $html = file_get_contents($file);
+            $dom = new DOMDocument();
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+            $query = "//tr[contains(translate(td/text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '" . strtolower($searchText) . "')]";
+            $filteredRows = $xpath->query($query);
+            return $filteredRows->length > 0;
+        });
+
+        // Calculate total pages
+        $totalPages = ceil(count($filteredFiles) / $itemsPerPage);
+
+        // Slice the filtered files to display on the current page
+        $startIndex = ($currentPage - 1) * $itemsPerPage;
+        $slicedFiles = array_slice($filteredFiles, $startIndex, $itemsPerPage);
+
+        if (!empty($slicedFiles)) {
+            foreach ($slicedFiles as $file) {
                 // Load the HTML content of each file
                 $html = file_get_contents($file);
 
@@ -113,11 +135,22 @@
                     echo '</table>';
                 }
             }
+
+            // Pagination links
+            echo '<div class="pagination">';
+            for ($page = 1; $page <= $totalPages; $page++) {
+                echo '<a href="?page=' . $page . '&search=' . urlencode($searchText) . '">' . $page . '</a>';
+            }
+            echo '</div>';
         } else {
-            echo "No HTML files found in the directory.";
+            echo "No matching results found.";
         }
+    } else {
+        echo "No HTML files found in the directory.";
     }
-    ?>
-&nbsp;<a href='index.php'>back</a>
+}
+?>
+
+&nbsp;<a href='flat_database.php'>back</a>
 </body>
 </html>

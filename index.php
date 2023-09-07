@@ -1,127 +1,185 @@
-﻿<!DOCTYPE html>
+<?php 
+  error_reporting(0);
+?>
+
+<!DOCTYPE html>
 <html>
-<head>
-  <title>
-    NoSQL PHP applications - v1.0.2 - by eXthothem
-  </title>
-  <style>
-    body {
-      font-family: arial;
-    }
+  <head>
+    <title>Flat Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
-    table {
-      width: 90%;
-      border-collapse: collapse;
-    }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 20px;
+        }
 
-    td{
-      text-align: center; 
-      padding: 10px;
-      border: 1px solid #CCC;
+        .sidebar {
+            width: 20%;
+            padding-right: 20px;
+        }
+
+        .main-content {
+            width: 75%;
+        }
+
+        .main_table {
+            width: 100%;
+        }
+
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .table_fields {
+            background-color: #DDD;
+        }
+
+        .form-container {
+            margin-top: 10px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 10px 0;
+        }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+        <div class="sidebar">
+            <form action="search_tables.php" method="POST">
+                <input type="text" name="search">
+                <input type="submit" value="Search">
+            </form>
+            <hr>
+            <form action="index.php" method="POST" class="form-container">
+                Database name or category</br>
+                <input type="text" name="database">
+                </br>Title</br>
+                <input type="text" name="title">
+                </br>Link or URL</br>
+                <input type="text" name="link">
+                </br>Description</br>
+                <textarea name="description"></textarea>
+                </br>User or source</br>
+                <input type="text" name="user">
+                <br><input type="submit" name="submit" value="Submit">
+            </form>
+            <a href="index.php">Home</a>
+        </div>
+        <div class="main-content">
+<?php
+
+$database = $_POST['database'];
+$title = $_POST['title'];
+$link = $_POST['link'];
+$description = $_POST['description'];
+$user = $_POST['user'];
+
+$database = strtolower($database);
+
+$avoid_js_insertion = array ('<','>');        
+
+$database = str_replace($avoid_js_insertion, "", $database); 
+$title  = str_replace($avoid_js_insertion, "", $title ); 
+$link = str_replace($avoid_js_insertion, "", $link); 
+$description = str_replace($avoid_js_insertion, "", $description); 
+
+$empty_check = $title . $link . $description;
+
+$date = date('Y-m-d');
+
+$dir = "categories/contents"; 
+
+if (isset($_POST['submit']) && $empty_check != "") {
+
+  mkdir("$dir", 0755, true);
+
+  if(file_exists("$dir/$database.html")){
+
+    $fp = fopen("$dir/$database.html", "a");
+    fwrite($fp, "<tr><td>$title</td><td><a href='$link' target='_blank'>$link</a></td><td>$date</td><td>$description</td><td><i>$user</i></td></tr>");
+    fclose($fp);
+  } else {
+    $fp = fopen("$dir/$database.html", "a");
+    fwrite($fp, "<link rel='stylesheet' type='text/css' href='../../tables.css'><table class='main_table'><tr class='table_fields'><td>Name</td><td>Link</td><td>Date</td><td>Description</td><td>User</td></tr><tr><td>$title</td><td><a href='$link' target='_blank'>$link</a></td><td>$date</td><td>$description</td><td><i>$user</i></td></tr>");
+    fclose($fp);
+ }
+
+  echo "Database '<i>$database</i>'</br>";  
+
+  include("$dir/$database.html");
+
+} else {
+
+  if (isset($_POST['submit']) && $database != "") {
+
+    if(file_exists("$dir/$database.html")){
+
+      echo "Database '<i>$database</i>'</br>";  
+      include("$dir/$database.html");
+
+    } else {
+
+      echo "This table do not exists.";
+  
+    }  
+
+  } else {
+
+    echo "<h1>eXthothem</h1>Our system uses simple HTML tables to store data. This allows users to easily access, save, and copy data in a straightforward manner, eliminating the need for complex databases or data exchange formats.";
+
+    echo " <a href='menu_contents.php'>More options.</a>";
+    echo "<hr><br><h1>Sourcecode</h1><a href='https://github.com/arthur-sacramento/exthothem' target='_blank'>Github</a>     <a href='https://sourceforge.net/projects/exthothem/' target='_blank'>Sourceforge</a>";
  
-    }
+  }
 
-    tr {
-      border: 1px solid #CCC;
-    }
-    
-    .textDescription {
-      font-family: verdana;
-      color: #333;
-      letter-spacing: 3px;
-    }
+}
 
-  </style>
-</head>
-<body>
-  <div align='center'>
-    <table>
-      <tr>
-        <td>
-          <div align='left'>
-          <span class='textDescription'>NoSQL PHP applications</span> 
-          </div>
-        </td>
-        <td style='background-color: #333;'>
-        </td>
-      </tr>
-    </table>
-    <br>
-    <table style='background-color: #DDD;'>
-      <tr>
-        <td style='border-right: 1px solid #CCC;'>      
-          <div align='center'>
-          <table style='background-color: #FFF;'>
-            <tr>
-              <td><a href="flat_database.php"><img src='icons/table.png' alt=''><br>Flat database</a></td>
-              <td><a href="fields_search.php"><img src='icons/application_form_magnify.png' alt=''><br>Search by file contents</a></td>
-              <td><a href="flat_insert_link.php"><img src='icons/backslash.png' alt=''><br>Share a link</a></td>
-              <td><a href="gallery_creator.php"><img src='icons/images.png' alt=''><br>Gallery creator</a> / <a href="gallery_list.php" target="_blank">List</a></td>
-              </tr>
-            <tr>
-              <td><a href="upload.php"><img src='icons/netvibes.png' alt=''><br>Upload a file (select)</a></td>
-              <td><a href="upload_drop.php"><img src='icons/package_add.png' alt=''><br>Upload a file (drop)</a></td>
-              <td><a href="fields.php"><img src='icons/document_copies.png' alt=''><br>Paste contents (multiple fields)</a></td>
-              <td><a href="paste.php"><img src='icons/document_empty.png' alt=''><br>Paste contents (one field)</a></td>
-            </tr>
-            <tr>
-              <td><a href="write_get.php"><img src='icons/attach.png' alt=''><br>Send text via GET contents</a></td>  
-              <td><a href="folders.php"><img src='icons/document_green.png' alt=''><br>Folders menu</a></td>  
-              <td><a href="files_full.php"><img src='icons/understanding.png' alt=''><br>Full search</a></td>
-              <td><a href="files.php"><img src='icons/folder_explorer.png' alt=''><br>Category search</a></td>
-            </tr>
-            <tr>
-              <td><a href="chat.php"><img src='icons/comment.png' alt=''><br>Chat</a></td>
-              <td><a href="comment.php?hash=hello"><img src='icons/comment.png' alt=''><br>Comment</a></td>
-              <td><a href="servers.php"><img src='icons/globe_australia.png' alt=''><br>Check servers</a></td>        
-              <td><a href="all_files.php"><img src='icons/list.png' alt=''><br>Show all files</a></td>  
-            </tr>
-            <tr>      
-              <td><a href="main.php"><img src='icons/image.png' alt=''><br>URL upload</a></td>      
-              <td><a href="menu.html"><img src='icons/controlbar.png' alt=''><br>Menu</a></td>
-              <td><a href="#"><img src='icons/coins_in_hand.png' alt=''><a href='https://www.paypal.com/donate/?hosted_button_id=MA7KAL6PP4Y7Q' target='_blank'>Donate</a> / <a href='#' onclick="alert('1CX6rNZnBexgTW8HW8VRhBoKAG3TsNc9Em');">BTC</a> / <a href='#' onclick="alert('exthothem@gmail.com');">Pix</a> </td>     
-              <td><a href='exthothem1.0.2.zip'><img src='icons/download.png' alt=''><br>Sourcecode</a></td>
-            </tr>
-            <tr>      
-              <td><a href="img_thumbs_creator.php"><img src='icons/image.png' alt=''><br>Thumbnail creator<br>(thumbs folder)</a></td>      
-              <td><a href="img_decrease.php"><img src='icons/image_gray.png' alt=''><br>Image compress</a></td>    
-              <td><a href='img_random.php'><img src='icons/dice.png' alt=''><br>Random image<br>generator</a></td>
-              <td><a href="README.txt"><img src='icons/help.png' alt=''><br>README</a></td>                   
-            </tr>
-          </table> 
-        </td>
-        <td style='background-color: #333;'></td>
-      </tr>
-    </table>
-    <br> 
-    <table style='border-radius: 5px 5px 5px 5px;'>
-      <tr style='border: 1px solid #FFF;'><td style='background-color: #00FFAA; color: #FFF; font-family: verdana;'>Freelance services</td></tr>
-      <tr>        
-        <td align='left'><a href='#' onclick="alert('PHP remote freelance services.');"><img src='icons/php.png' alt=''>PHP freelance</a></td>
-        <td><a href='#' onclick="alert('Pack of adult images and others categories generated by artificial intelligence.');"><img src='icons/things_beauty.png' alt=''>Hot images</a></td>
-        <td><a href='#' onclick="alert('Have your advertisement, name, or brand distributed alongside our software and websites.');"><img src='icons/chart_up_color.png' alt=''>Spoonsor</a></td>
-        <td><a href='index.html' onclick="alert('Promote our project and receive our token as reward.');" target='_blank'><img src='icons/elements.png' alt=''>Tokens</a></td>
-      </tr>
-      <tr>
-        <td><a href='#' onclick="alert('Gain a general understanding of programming. For beginners!');"><img src='icons/rubber_duck.png' alt=''>Programming course</a></td>
-        <td><a href='#' onclick="alert('Request a remote task as: Providing feedback on a website or app, Basic video editing, music composition or drum insert, Proofreading a short document or article, Creating a simple graphic design element (e.g., logo resizing, basic image editing), image creation with A.I, product or software review,  text correction, article creation, content writing, moderation, customer service, social media management, among others.');"><img src='icons/clown_fish.png' alt=''>Remote tasks</td>
-        <td><a href='#' onclick="alert('Get the right to use our software commercially and also have access to updates and support. Or participate in the profit and development of the project by paying a small registration fee.');"><img src='icons/rosette.png' alt='' width='20px'>Commercial use</a></td>       
-        <td>
-          <a href='#' onclick="alert('exthothem@gmail.com');"><img src='icons/email.png' width='32px' alt='email'></a>           
-          <a href='http://wa.me/5591983608861' target='_blank'><img src='icons/whatsapp_small.png' alt='whatsapp'></a>          
-          <br> 
-      </td> 
-     </trd>
-   </table>
-
-  <br><iframe src='https://filevenda.netlify.app/categories/ads.html' width='100%' style='border: 0px;'></iframe>
-
-  <br>
-  <a href='https://www.linkedin.com/in/arthur-sacramento-a55003230/' target='_blank'>Linkedin</a> &nbsp; 
-  <a href='https://github.com/arthur-sacramento/exthothem' target='_blank'>Github</a> &nbsp; 
-  <a href='https://sourceforge.net/projects/exthothem/' target='_blank'>Sourceforge</a> &nbsp; 
-  <br><br>
-  © 2023 - eXthothem<br>
-  <i>icons by</i> fatcow
-</body>
+?>
+       </div>
+    </div>
+  </body>
 </html>
