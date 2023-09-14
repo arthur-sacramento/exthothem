@@ -17,7 +17,7 @@
           <div align='center'>
           <table style='background-color: #FFF;'>
             <tr>
-              <td><a href="flat_database.php"><img src='icons/table.png' alt=''><br>Flat database</a></td>
+              <td><a href="index.php"><img src='icons/table.png' alt=''><br>Flat database</a></td>
               <td><a href="fields_search.php"><img src='icons/application_form_magnify.png' alt=''><br>Search by file contents</a></td>
               <td><a href="flat_insert_link.php"><img src='icons/backslash.png' alt=''><br>Share a link</a></td>
               <td><a href="gallery_creator.php"><img src='icons/images.png' alt=''><br>Gallery creator</a> / <a href="gallery_list.php" target="_blank">List</a></td>
@@ -44,13 +44,19 @@
               <td><a href="main.php"><img src='icons/image.png' alt=''><br>URL upload</a></td>      
               <td><a href="menu.html"><img src='icons/controlbar.png' alt=''><br>Menu</a></td>
               <td><a href="#"><img src='icons/coins_in_hand.png' alt=''><a href='https://www.paypal.com/donate/?hosted_button_id=MA7KAL6PP4Y7Q' target='_blank'>Donate</a> / <a href='#' onclick="alert('1CX6rNZnBexgTW8HW8VRhBoKAG3TsNc9Em');">BTC</a> / <a href='#' onclick="alert('exthothem@gmail.com');">Pix</a> </td>     
-              <td><a href='exthothem1.0.2.1.zip'><img src='icons/download.png' alt=''><br>Sourcecode</a></td>
+              <td><a href='exthothem1.0.2.2.zip'><img src='icons/download.png' alt=''><br>Sourcecode</a></td>
             </tr>
             <tr>      
               <td><a href="img_thumbs_creator.php"><img src='icons/image.png' alt=''><br>Thumbnail creator<br>(thumbs folder)</a></td>      
               <td><a href="img_decrease.php"><img src='icons/image_gray.png' alt=''><br>Image compress</a></td>    
               <td><a href='img_random.php'><img src='icons/dice.png' alt=''><br>Random image<br>generator</a></td>
               <td><a href="README.txt"><img src='icons/help.png' alt=''><br>README</a></td>                   
+            </tr>
+            <tr>      
+              <td><a href="table_row_delete.php"><img src='icons/image.png' alt=''><br>Delete row</a></td>      
+              <td><a href="table_row_update.php"><img src='icons/image_gray.png' alt=''><br>Update row</a></td>    
+              <td><a href='table_submit.php'><img src='icons/dice.png' alt=''><br>Save a list of links as table</a></td>
+              <td><a href="README.txt"><img src='icons/help.png' alt=''><br>PHP freelancer</a></td>                   
             </tr>
           </table> 
         </td>

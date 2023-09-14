@@ -119,5 +119,7 @@
     }
     ?>
 &nbsp;<a href='index.php'>back</a>
+
+<br><iframe src='https://filevenda.netlify.app/categories/ads.html' width='100%' style='border: 0px;'></iframe>
 </body>
 </html>

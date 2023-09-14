@@ -1,0 +1,3 @@
+v.1.0.2.2
+- You can automatically create a table pasting a list of links.
+- Now the tables have a maximum size. When it is reached, new entries are saved in a new document.

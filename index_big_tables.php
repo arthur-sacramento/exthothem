@@ -112,9 +112,6 @@
         <div class="main-content">
 <?php
 
-$table = $_GET['table'];
-$table_number = $_GET['num'];
-
 $database = $_POST['database'];
 $title = $_POST['title'];
 $link = $_POST['link'];
@@ -136,58 +133,34 @@ $date = date('Y-m-d');
 
 $dir = "categories/contents"; 
 
-if ($table != "" && $table_number != ""){$database = $table . "_" . $table_number;}
-
 if (isset($_POST['submit']) && $empty_check != "") {
 
   mkdir("$dir", 0755, true);
-  
-  $max_table_size = 500;
 
-  $x = 1;
+  if(file_exists("$dir/$database.html")){
 
-  while(true){
-
-    $table_count = "_" . $x;
-
-    if ($x == 1){$table_count = "";}
-
-    $current_table = $database . $table_count . ".html";
-
-    $file_size = filesize("$dir/$current_table");
-
-    if($file_size < $max_table_size){
-
-      if(file_exists("$dir/$current_table")){
-        $fp = fopen("$dir/$current_table", "a");     
-        fwrite($fp, "<tr><td>$title</td><td><a href='$link' target='_blank'>$link</a></td><td>$date</td><td>$description</td><td><i>$user</i></td></tr>");
-      } else {
-        $fp = fopen("$dir/$current_table", "a");
-        fwrite($fp, "<link rel='stylesheet' type='text/css' href='../../tables.css'><table class='main_table'><tr class='table_fields'><td>Name</td><td>Link</td><td>Date</td><td>Description</td><td>User</td></tr><tr><td>$title</td><td><a href='$link' target='_blank'>$link</a></td><td>$date</td><td>$description</td><td><i>$user</i></td></tr>");
-       
-      }
-
-      fclose($fp);
-      break;
-    }
-  $x++;
-  }
-  
-  fclose($fp);
+    $fp = fopen("$dir/$database.html", "a");
+    fwrite($fp, "<tr><td>$title</td><td><a href='$link' target='_blank'>$link</a></td><td>$date</td><td>$description</td><td><i>$user</i></td></tr>");
+    fclose($fp);
+  } else {
+    $fp = fopen("$dir/$database.html", "a");
+    fwrite($fp, "<link rel='stylesheet' type='text/css' href='../../tables.css'><table class='main_table'><tr class='table_fields'><td>Name</td><td>Link</td><td>Date</td><td>Description</td><td>User</td></tr><tr><td>$title</td><td><a href='$link' target='_blank'>$link</a></td><td>$date</td><td>$description</td><td><i>$user</i></td></tr>");
+    fclose($fp);
+ }
 
   echo "Database '<i>$database</i>'</br>";  
 
   include("$dir/$database.html");
- 
+
 } else {
 
-  if ($database != "") {
+  if (isset($_POST['submit']) && $database != "") {
 
     if(file_exists("$dir/$database.html")){
 
       echo "Database '<i>$database</i>'</br>";  
       include("$dir/$database.html");
-      
+
     } else {
 
       echo "This table do not exists.";
@@ -196,29 +169,18 @@ if (isset($_POST['submit']) && $empty_check != "") {
 
   } else {
 
-    echo "<h1>eXthothem</h1>";
-    echo "<a href='https://github.com/arthur-sacramento/exthothem' target='_blank'>Github</a> <a href='https://sourceforge.net/projects/exthothem/' target='_blank'>Sourceforge</a><hr>";
-    echo "<br><br><b>eXthothem</b> is a simple database that stores your data in HTML tables. You can insert or access the tables directly without the need for a complex database or data exchange format, making your requests fast and easy.";
+    echo "<h1>eXthothem</h1>Our system uses simple HTML tables to store data. This allows users to easily access, save, and copy data in a straightforward manner, eliminating the need for complex databases or data exchange formats.";
+
     echo " <a href='menu_contents.php'>More options.</a>";
+    echo "<hr><br><h1>Sourcecode</h1><a href='https://github.com/arthur-sacramento/exthothem' target='_blank'>Github</a>     <a href='https://sourceforge.net/projects/exthothem/' target='_blank'>Sourceforge</a>";
+    echo " <a href='mirrors.txt' target='_blank'>Other options</a>";
  
   }
 
 }
 
 ?>
-<br><br><iframe src='https://filevenda.netlify.app/categories/ads.html' width='100%' style='border: 0px;'></iframe>
        </div>
     </div>
-<?php 
-
-if ($table_number == "" || $table_number == 0){$table_number = 1;}
-
-$next_table = $table_number + 1;
-
-if ($table == ""){$table = $database;}
-
-if(file_exists("$dir/$table" . "_" . $next_table . ".html")){echo "<div align='right'><a href='index.php?table=$table&num=$next_table'>Next</div>";}  
-?>
-
   </body>
 </html>
