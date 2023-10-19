@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickGuide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 2% 10% 2% 4%;
+            background-color: #f4f4f4;
+            text-align: justify;
+        }
+
+        .topic {
+            margin-bottom: 20px;
+        }
+
+        .topic h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .topic p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .topic:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>QuickGuide</h1>
+<p>
+<b>Overview</b><br>The goal of the system is to build ready HTML pages that can be easily copied or exported. When using a traditional database like MySQL, several intermediate steps are performed, which, while providing flexibility, sometimes increases complexity or requires more resources
+</p>
+
+    <div class="topic">
+        <h2>1. Database</h2>
+        <p>Instead of using a large file as a database, data will be stored in numerous small documents such as cars_1.html, cars_2.html, cars_3.html and so on, serving both as a category ready to be viewed or searched, as well as a navigation to the next page result. When the limit is exceeded (of current file), a new document will be created for store the new data.</p>
+    </div>
+
+    <div class="topic">
+        <h2>2. Search</h2>
+        <p>Synonyms and category detection can be used into the search system. For example, if users search for 'book' or 'pdf', they will be redirected to the table or document 'book.html'. Similarly, if the search query matches a category, users will be redirected accordingly. For instance, a search for 'beautiful art' will redirect to the table 'art', that is,  any sentence containing the word 'art' will direct to the 'art' category or table.</p>
+    </div>
+
+    <div class="topic">
+        <h2>3. Custom Styling</h2>
+        <p>Users have the option to choose a custom style for their posts. By default, there are 'default' and 'simple' options available.</p>
+    </div>
+
+    <div class="topic">
+        <h2>4. Others</h2>
+        <p>There are other options and tools in <a href='menu_contents.php'>menu_contents.php</a></p>
+    </div>
+
+<br><a href='index.php'>back</a>
+</body>
+
+</html>

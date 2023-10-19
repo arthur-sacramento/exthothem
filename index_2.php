@@ -293,9 +293,9 @@ if (isset($_POST['submit']) && $empty_check != "") {
  
     echo "<li><a href='quick_guide.html'>Quick guide</a></li>";
 
-    echo "<br><br><br><hr><table width='100%'><tr><td valign='top'><div class='others-links'>PHP Freelance<br><a href='https://www.fiverr.com/arthursacrament' target='_blank'>Fivver / </a>";
+    echo "<br><br><br><hr><table width='100%'><tr><td><div class='others-links'>PHP Freelance<br><a href='https://www.fiverr.com/arthursacrament' target='_blank'>Fivver / </a>";
   
-    echo "<a href='https://www.upwork.com/freelancers/~01259cc727c8fcdfb6' target='_blank'>Upwork / </a> ";
+    echo "<a href='https://www.fiverr.com/arthursacrament' target='_blank'>Upwork / </a> ";
 
     echo "<a href='https://www.linkedin.com/in/arthur-sacramento-a55003230/' target='_blank'>Linkedin / </a>";
 
@@ -311,19 +311,21 @@ if (isset($_POST['submit']) && $empty_check != "") {
 
     echo "<br><br> Web<br><a href='https://sourceforge.net/projects/exthothem/' target='_blank'>Sourceforge / </a> ";
 
-    echo "<a href='https://github.com/arthur-sacramento/exthothem' target='_blank'>Github / </a> ";
+    echo "<a href='https://sourceforge.net/projects/exthothem/' target='_blank'>Github / </a> ";
 
     echo "<a href='http://exthothem.000webhostapp.com/' target='_blank'>Website / </a> ";
 
-    echo "<a href='https://exthothemdb.blogspot.com/' target='_blank'>Blog / </a> ";
+    echo "<a href='https://exthothemdb.blogspot.com/' target='_blank'>Blog /</a> ";
 
-    echo "<a href='https://twitter.com/exthothem' target='_blank'>Twitter / </a>";
+    echo "<a href='https://twitter.com/exthothem' target='_blank'>Twitter</a>";
 
-    echo "<a href='https://twitter.com/exthothem' target='_blank'>Youtube / </a>";
+    echo "<br><br> Download (v.1.0.3)<br><a href='#' target='_blank'>Mega / </a> ";
 
-    echo "<a href='https://www.tiktok.com/@exthothem' target='_blank'>TikTok</a>";
+    echo "<a href='#' target='_blank'>4Shared / </a> ";
 
-    echo "<br><br><br><i>v1.0.3</i>";
+    echo "<a href='#' target='_blank'>Mediafire / </a> ";
+
+    echo "<a href='#' target='_blank'>Google Drive /</a> ";
 
     echo "</div></td><td>Other services</br><br>";
 
@@ -331,7 +333,7 @@ if (isset($_POST['submit']) && $empty_check != "") {
 
     echo "<a href='lander.html' target='_blank' onclick=\"alert('Have access to exclusive updates, support and commercial use.');\">Enterprise version</a><br>";
 
-    echo "<a href='lander.html' target='_blank'>Advertise or sponsor</a><br>";
+    echo "<a href='lander.html' target='_blank'>Advertise or sponsoor</a><br>";
 
     echo "<a href='lander.html' target='_blank'>Text translations<br>";
 

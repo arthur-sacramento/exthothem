@@ -53,10 +53,16 @@
               <td><a href="README.txt"><img src='icons/help.png' alt=''><br>README</a></td>                   
             </tr>
             <tr>      
-              <td><a href="table_row_delete.php"><img src='icons/image.png' alt=''><br>Delete row</a></td>      
-              <td><a href="table_row_update.php"><img src='icons/image_gray.png' alt=''><br>Update row</a></td>    
-              <td><a href='table_submit.php'><img src='icons/dice.png' alt=''><br>Save a list of links as table</a></td>
-              <td><a href="README.txt"><img src='icons/help.png' alt=''><br>PHP freelancer</a></td>                   
+              <td><a href="table_row_delete.php"><img src='icons/table.png' alt=''><br>Delete row</a></td>      
+              <td><a href="table_row_update.php"><img src='icons/table.png' alt=''><br>Update row</a></td>    
+              <td><a href='table_submit.php'><img src='icons/table.png' alt=''><br>Save a list of links as table</a></td>
+              <td><a href="simple_show.php"><img src='icons/table.png' alt=''><br>View tables</a></td>                   
+            </tr>
+            <tr>      
+              <td><a href="style_test.php"><img src='icons/image.png' alt=''><br>Page design</a></td>      
+              <td><a href="simple_show.php"><img src='icons/image_gray.png' alt=''><br>Show all files</a></td>    
+              <td><a href='index_js.html'><img src='icons/dice.png' alt=''><br>Search with JS</a></td>
+              <td><a href="links_find.php"><img src='icons/table.png' alt=''><br>Get the links of a page</a></td>                   
             </tr>
           </table> 
         </td>

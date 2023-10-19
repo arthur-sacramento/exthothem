@@ -1,0 +1,7 @@
+1. Instead of using a large file as a database, there will be numerous documents that will store the data, for example, cars_1.html, cars_2.html, cars_3.html, with each document having a size limit. When the limit is exceeded, a new document will be created. Each page can be directly viewed by the user and contain an embedded link to the next page.
+
+2. Synonyms or category detection can be utilized in the search. For example, if the user searches for 'cat' or 'feline', they will be redirected to the table or document 'cat.html'. Similarly, if the user's search contains a word that corresponds to a category, they can be redirected to that category. For instance, if they search for 'beautiful art', they will be redirected to the table or document 'art'."
+
+
+3. The user can choose a custom style for their post. By default, there are only 'default' and 'simple' options.
+

@@ -21,7 +21,7 @@
         foreach ($images as $image) {
             if ($image !== '.' && $image !== '..') {
                 $imagePath = $thumbFolder . '/' . $image;
-                $croppedPath = $croppedFolder . '/' . $image;
+                $croppedPath = $croppedFolder . '/c_' . $image;
 
                 // Get original image dimensions
                 list($width, $height) = getimagesize($imagePath);

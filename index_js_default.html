@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>eXthothem 1.0.3</title>
+    <title>Redirect Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,48 +49,11 @@
 <body>
     <form id="redirectForm">
         <label for="fileName">Enter a category:</label>
-        <input type="text" id="fileName" name="fileName" required><ul id="autocomplete-list"></ul>
+        <input type="text" id="fileName" name="fileName" required>
         <input type="submit" value="Submit">
     </form>
 
     <script>
-
-// List of words for autocomplete
-    const wordList = ["art", "books", "chans", "decentralization", "freeware", "linux", "pastebin", "PHP", "opensource", "music", "video", "porn", "search", "tech"];
-
-    // Input element and autocomplete list
-    const fileNameInput = document.getElementById("fileName");
-    const autocompleteList = document.getElementById("autocomplete-list");
-
-    // Event listener for input changes
-    fileNameInput.addEventListener("input", function () {
-      const inputValue = fileNameInput.value.toLowerCase();
-      const suggestions = [];
-
-      // Clear previous suggestions
-      autocompleteList.innerHTML = "";
-
-      // Filter words that start with the input value
-      for (const word of wordList) {
-        if (word.toLowerCase().startsWith(inputValue)) {
-          suggestions.push(word);
-        }
-      }
-
-      // Display suggestions in the autocomplete list
-      suggestions.forEach((word) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = word;
-        listItem.addEventListener("click", function () {
-          // Set the input field value to the clicked suggestion
-          fileNameInput.value = word;
-          // Clear the suggestions
-          autocompleteList.innerHTML = "";
-        });
-        autocompleteList.appendChild(listItem);
-      });
-    });
-
         document.getElementById("redirectForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
@@ -111,12 +74,10 @@
                 })
                 .catch(error => {
                     // Error occurred while checking file existence
-                    //console.error("Error:", error);
+                    console.error("Error:", error);
                     alert("An error occurred while checking file existence.");
-                    window.location.href = redirectURL;
                 });
         });
-
     </script>
 </body>
 </html>
