@@ -63,11 +63,67 @@
             border: 1px solid #ddd;
             text-align: left;
         }
-    </style>
+
+ .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        /* Style for the left column */
+        .left-column {
+            flex: 1;
+            padding: 10px;
+        }
+
+        /* Style for the right column */
+        .right-column {
+            flex: 1;
+            padding: 10px;
+        }
+
+        /* Style for thumbnail image */
+        .thumbnail {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Style for title */
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Style for date and user */
+        .date, .user {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Style for short description */
+        .short-description {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Style for full description */
+        .description {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        /* Style for full description */
+        .next-page {
+            visibility: hidden;
+        }
+    </style>   
 </head>
 <body>
     <header>
-        <h1>HTML Table Rows Filter</h1>
+        <h1>HTML Search</h1>
     </header>
     <form method="post">
         <label for="search">Search:</label>
@@ -84,7 +140,7 @@
         $directory = 'categories/contents';
 
         // List all HTML files in the directory
-        $files = glob($directory . '/*');
+        $files = glob($directory . '/*.html');
 
         if (!empty($files)) {
             foreach ($files as $file) {
@@ -117,9 +173,41 @@
             echo "No HTML files found in the directory.";
         }
     }
+
+$htmlFilePath = $_SERVER['DOCUMENT_ROOT'] . "/$directory/$searchText.html";
+
+    if(file_exists("$directory/$searchText.html")){
+
+      include("$directory/$searchText.html");
+      
+    }
+
+
+
+if(file_exists("categories/contents/$searchText" . "_2" . ".html")){echo "<div align='right'><a href='index.php?table=$searchText&num=2'><h1>Next</h1></div>";}  
     ?>
-&nbsp;<a href='index.php'>back</a>
+
+&nbsp;&nbsp;<a href='index.php'>back</a>
 
 <br><iframe src='https://filevenda.netlify.app/categories/ads.html' width='100%' style='border: 0px;'></iframe>
+<script>
+
+// change the path of all images to display correctly.
+
+// Select all image elements on the page
+const images = document.querySelectorAll('img');
+
+// Loop through each image and modify the src attribute
+images.forEach((image) => {
+    // Get the current src attribute value
+    let currentSrc = image.getAttribute('src');
+    
+    // Add "../../" to the beginning of the src attribute
+    currentSrc = `categories/contents/${currentSrc}`;
+    
+    // Set the modified src attribute value
+    image.setAttribute('src', currentSrc);
+});
+</script>
 </body>
 </html>

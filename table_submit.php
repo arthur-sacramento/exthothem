@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $html .= '<td><a href="' . htmlspecialchars($row['Name']) . '">' . htmlspecialchars($row['Name']) . '</a></td>';
         $html .= '<td>' . htmlspecialchars($row['Date']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['Description']) . '</td>';
-        $html .= '<td>' . htmlspecialchars($row['User']) . '</td>';
+        $html .= '<td>' . "" . '</td>';
         $html .= '</tr>';
     }
 
